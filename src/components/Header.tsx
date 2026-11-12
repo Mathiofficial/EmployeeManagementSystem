@@ -64,9 +64,9 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--line)] bg-[var(--header-bg)] px-4 backdrop-blur-lg">
-      <nav className="flex w-full flex-wrap items-center gap-4 py-3 sm:py-4">
+      <nav className="flex w-full flex-col items-stretch gap-3 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 sm:py-4">
         {/* Left side: Brand */}
-        <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-6 gap-y-2">
+        <div className="flex w-full min-w-0 flex-1 items-center sm:w-auto sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
           <h2 className="m-0 min-w-0 text-base font-semibold tracking-tight">
             <Link
               to="/"
@@ -129,8 +129,8 @@ export default function Header() {
         </div>
 
         {/* Right side: Navigation, theme, and profile */}
-        <div className="ml-auto flex items-center gap-3">
-          <div className="flex items-center gap-4 text-sm font-semibold">
+        <div className="ml-0 flex w-full items-center justify-between gap-2 sm:ml-auto sm:w-auto sm:justify-start sm:gap-3">
+          <div className="flex items-center gap-3 text-xs font-semibold sm:gap-4 sm:text-sm">
             <Link
               to="/"
               className="nav-link"
