@@ -156,7 +156,7 @@ function Dashboard() {
       )}
 
       {/* Quick Access */}
-      <section className="space-y-4">
+      <section className="quick-access-section space-y-4">
         <div>
           <h2 className="text-xl font-bold text-[var(--sea-ink)]">
             Quick Access
@@ -173,27 +173,27 @@ function Dashboard() {
             <Link
               key={item.path}
               to={item.path}
-              className="group block rounded-2xl border border-[var(--chip-line)] bg-[var(--chip-bg)] p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal-400 hover:shadow-lg"
+              className="quick-access-card group block rounded-2xl border p-6 no-underline"
             >
               <div className="mb-5 flex items-center justify-between">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500/10 text-sm font-bold text-teal-600 dark:text-teal-300">
+                <span className="quick-access-number flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-                <span className="text-lg text-gray-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-teal-500">
+                <span aria-hidden="true" className="quick-access-arrow text-lg">
                   →
                 </span>
               </div>
 
-              <h3 className="text-lg font-semibold text-[var(--sea-ink)]">
+              <h3 className="quick-access-title text-lg font-bold">
                 {item.title}
               </h3>
 
-              <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
+              <p className="quick-access-description mt-2 text-sm leading-6">
                 {item.description}
               </p>
 
-              <p className="mt-5 text-sm font-semibold text-teal-600 dark:text-teal-300">
+              <p className="quick-access-action mt-5 text-sm font-bold">
                 Open section
               </p>
             </Link>
