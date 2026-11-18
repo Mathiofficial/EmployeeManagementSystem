@@ -1,11 +1,17 @@
 import { LogOut, UserRound, User, LogIn } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
+import {
+  Link,
+  useNavigate,
+  useRouter,
+  useRouterState,
+} from '@tanstack/react-router'
 import ThemeToggle from './ThemeToggle'
 import { authClient } from '@/lib/auth-client'
 
 export default function Header() {
   const navigate = useNavigate()
+  const router = useRouter()
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   })
@@ -54,6 +60,7 @@ export default function Header() {
 
     try {
       await authClient.signOut()
+      router.clearCache()
       await navigate({ to: '/' })
     } catch (error) {
       console.error('Logout failed:', error)

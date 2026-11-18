@@ -26,34 +26,29 @@ export const Route = createFileRoute("/attendance/")({
     if (appUser.role !== "ADMIN" && appUser.role !== "EMPLOYEE") {
       throw redirect({ to: "/dashboard" });
     }
+
+    return { appUser };
   },
-  loader: async () => {
-  const appUser = await getCurrentAppUser();
-  const records = await getAttendanceRecords();
+  loader: async ({ context }) => {
+    const { appUser } = context;
+    const isAdmin = appUser.role === "ADMIN";
 
-  const adminRecords =
-    appUser?.role === "ADMIN"
-      ? await getAdminAttendanceReport({ data: {} })
-      : [];
+    const [records, adminRecords, employees, leaveRequests] =
+      await Promise.all([
+        getAttendanceRecords(),
+        isAdmin ? getAdminAttendanceReport({ data: {} }) : Promise.resolve([]),
+        isAdmin ? getEmployees() : Promise.resolve([]),
+        isAdmin ? getLeaveRequests() : Promise.resolve([]),
+      ]);
 
-  const employees =
-    appUser?.role === "ADMIN"
-      ? await getEmployees()
-      : [];
-
-  const leaveRequests =
-    appUser?.role === "ADMIN"
-      ? await getLeaveRequests()
-      : [];
-
-  return {
-    records,
-    adminRecords,
-    employees,
-    leaveRequests,
-    appUser,
-  };
-},
+    return {
+      records,
+      adminRecords,
+      employees,
+      leaveRequests,
+      appUser,
+    };
+  },
   component: AttendancePage,
 });
 
